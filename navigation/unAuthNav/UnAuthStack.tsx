@@ -4,6 +4,7 @@ import { useNavigation } from '@react-navigation/native';
 
 // screens
 import WelcomeScreen from '../../screens/WelcomeScreen';
+import ThemePreferenceScreen from '../../screens/ThemePreferenceScreen';
 
 // type
 import type { UnAuthStackParamList } from '../../types/un-auth-stack';
@@ -24,6 +25,13 @@ const UnAuthStack = ()=> {
       <Stack.Screen 
         name="WelcomeScreen" 
         component={WelcomeScreen}
+        options={{
+          headerShown:false
+        }}
+      />
+      <Stack.Screen 
+        name="ThemePreferenceScreen" 
+        component={ThemePreferenceScreen}
         options={{
           headerShown:false
         }}

@@ -13,12 +13,12 @@ const authSlice = createSlice({
   name:'auth',
   initialState,
   reducers:{
-    updateAuthStatus:(state)=>{
+    signInAuthStatus:(state)=>{
         state.isAuthenticated = true;
     }
   }
 })
 
-export const { updateAuthStatus} = authSlice.actions;
+export const { signInAuthStatus } = authSlice.actions;
 
 export default authSlice.reducer;

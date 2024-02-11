@@ -1,8 +1,13 @@
 import {SafeAreaView} from "react-native"
 import { NavigationContainer } from "@react-navigation/native";
-import UnAuthStack from "./unAuthNav/UnAuthStack";
+
+// redux
 import { RootState } from "../redux/store";
 import { useSelector } from "react-redux";
+
+// stacks
+import UnAuthStack from "./unAuthNav/UnAuthStack";
+import AuthStack from "./authNav/AuthStack";
 
 const RootNavigation =()=>{
   const {isAuthenticated} = useSelector((state:RootState)=>state.auth);
@@ -10,7 +15,7 @@ const RootNavigation =()=>{
   return(
     <NavigationContainer>
       <SafeAreaView/>
-      {!isAuthenticated ? <UnAuthStack/> : <UnAuthStack/>}
+      {!isAuthenticated ? <UnAuthStack/> : <AuthStack/>}
     </NavigationContainer>
   )
 }
