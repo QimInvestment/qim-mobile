@@ -1,6 +1,6 @@
-import type { COLORSType, ThemeType } from '../types/theme';
+import type { ThemeType } from '../types/theme';
 
-function createTheme(theme='lightTheme'): COLORSType{
+function createTheme(theme='lightTheme'): ThemeType{
   const lightTheme : ThemeType={
     color: '#333333',
     backGroundColor: '#F6F6F6'
@@ -11,16 +11,15 @@ function createTheme(theme='lightTheme'): COLORSType{
   }
 
   const presentTheme : ThemeType = theme === 'lightTheme' ? lightTheme : darkTheme
-  
-  const allTheme: COLORSType={
-   ...presentTheme,
-   // other colors that don't switch comes here
-   moreColor: 'brown'
-  }
 
-  return allTheme;
+  return presentTheme;
+}
+
+const COLORS={
+  exampleBackground: "rgba(232, 232, 232, 0.20)",
 }
 
 export{
   createTheme,
+  COLORS
 }

@@ -1,6 +1,13 @@
 import { Button, Text, View } from "react-native";
 import useUnAuthNavigation from "../hooks/useUnAuthNavigation";
 
+// assets
+import GoogleLogoIcon from "../assets/icons/shared/GoogleLogoIcon";
+
+// components
+import CustomButton from "../components/shared/CustomButton";
+import ButtonWithIcon from "../components/shared/ButtonWithIcon";
+
 // redux
 import { RootState } from "../redux/store";
 import { useSelector, useDispatch } from "react-redux";
@@ -15,8 +22,19 @@ const WelcomeScreen =()=>{
   return(
     <View style={{backgroundColor:theme.backGroundColor}}>
       <Text style={{color:theme.color}}>Welcome</Text>
-      <Button title="Next Screen" onPress={()=>navigation.navigate("ThemePreferenceScreen")}/>
-      <Button title="Switch Theme" onPress={()=>dispatch(toggleTheme())}/>
+      <CustomButton
+        buttonText="Next Screen"
+        onPress={()=>navigation.navigate("ThemePreferenceScreen")}
+      />
+      <CustomButton
+        buttonText="Switch Theme"
+        onPress={()=>dispatch(toggleTheme())}
+      />
+      <ButtonWithIcon
+        icon={<GoogleLogoIcon/>}
+        buttonText="Continue to MySpace"
+        onPress={()=>null}
+      />
     </View>
   )
 }
