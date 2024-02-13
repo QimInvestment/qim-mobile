@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { Button, Text, View } from "react-native";
+import { Text, View } from "react-native";
 import useUnAuthNavigation from "../hooks/useUnAuthNavigation";
 
 // assets
@@ -18,14 +17,17 @@ import CustomInput from "../components/shared/CustomInput";
 import { COLORS } from "../constants/theme";
 import PinVerificationPane from "../components/shared/PinVerificationPane";
 import CompletionModal from "../components/shared/CompletionModal";
+import WelcomeScreenService from "../service/Welcome/WelcomeScreenService";
 
 
 const WelcomeScreen =()=>{
   const dispatch = useDispatch()
   const navigation =  useUnAuthNavigation();
   const theme = useSelector((state:RootState)=>state.theme.theme);
-  const [pin, setPin] = useState("");
-  const [isCompModalOpen, setIsCompModalOpen] = useState(false);
+
+  // screen state and logic
+  const {pin, setPin, isCompModalOpen, setIsCompModalOpen} = WelcomeScreenService();
+  
 
   return(
     <View style={{flex:1, backgroundColor:theme.backGroundColor}}>
