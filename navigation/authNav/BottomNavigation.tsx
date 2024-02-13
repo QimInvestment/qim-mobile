@@ -1,63 +1,50 @@
-import { useEffect } from 'react';
-import { createBottomTabNavigator, BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
+
+import { createBottomTabNavigator, BottomTabNavigationProp, BottomTabBarProps } from '@react-navigation/bottom-tabs';
 import { useNavigation } from '@react-navigation/native';
-import { BottomTabsParamList } from '@/types/auth-stack';
+import CustomBottomTabBar from '../../components/BottomNavigation/CustomBottomTabBar';
 
-
-import { TradeIcon, TradeIconGreen } from '../../assets/icons/bottonTabs';
+// assets
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { COLORS } from '../../constants/theme';
 
 // screens
-import TradeIndex from '../../screens/trade/TradeIndex';
-import Home from '../../screens/Home';
-import { Text } from 'react-native';
+import DashboardScreen from '../../screens/Dashboard/DashboardScreen';
+
+
+import { BottomTabsParamList } from '../../types/auth-stack';
+
 
 const Tab = createBottomTabNavigator<BottomTabsParamList>();
 type NavProp = BottomTabNavigationProp<BottomTabsParamList>
 
 const BottomNavigation =()=>{
-  const navigation = useNavigation<NavProp>();
-
-  // function trackBottomNav({navigation, route}){
-  //   return({
-  //     tabPress:()=>{
-  //       console.log("mama mia", route)
-  //     }
-  //   })
-  // }
-
   return(
     <Tab.Navigator
+      tabBar={props => <CustomBottomTabBar {...props} />}
       screenOptions={{
         headerShown:false,
-        tabBarActiveTintColor:COLORS.primaryGreen,
-        tabBarStyle:{backgroundColor:COLORS.componentGray}
       }}
-      // screenListeners={trackBottomNav}
-      
     >
         <Tab.Screen 
-          name="TradeBottomTab" 
-          component={TradeIndex}
+          name="HomeBottomTab" 
+          component={DashboardScreen}
           options={{
-            title:"Trade",
+            title:"Home",
             tabBarIcon:({ focused, color, size})=>{
-              return focused ? <TradeIconGreen/> : <TradeIcon/> 
+              return <MaterialCommunityIcons name="home-automation" size={size} color={color} />
             }
           }}
         />
         <Tab.Screen 
-          name="PortfolioBottomTab" 
-          component={Home}
+          name="InvestBottomTab" 
+          component={DashboardScreen}
           options={{
-            title:"Portfolio"
-          }}
-        />
-        <Tab.Screen 
-          name="SearchBottomTab" 
-          component={Home}
-          options={{
-            title:"Search"
+            title:"Invest",
+            tabBarLabelPosition:'beside-icon',
+            tabBarStyle:{backgroundColor:'green', flexDirection:'row', alignItems:'center', justifyContent:'center'},
+            tabBarIcon:({ focused, color, size})=>{
+              return <MaterialCommunityIcons name="home-automation" size={size} color={color} />
+            }
           }}
         />
     </Tab.Navigator> 

@@ -24,7 +24,7 @@ type ButtonWithIconProps = {
   /* <ButtonWithIcon
     buttonText="Log In"
     type="button"
-    containerStyle={`bg-primaryGreen border-[0.9px] border-primaryGreen mr-5`}
+    containerStyle={{}}
     textStyle="text-primaryGreen"
 /> */
 }

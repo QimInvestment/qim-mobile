@@ -4,6 +4,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import DashboardScreen from "../../screens/Dashboard/DashboardScreen";
 
 import { AuthStackParamList } from "../../types/auth-stack";
+import BottomNavigation from "./BottomNavigation";
 
 const Stack = createNativeStackNavigator<AuthStackParamList>()
 
@@ -12,8 +13,9 @@ const AuthStack =()=>{
     <Stack.Navigator>
       <Stack.Screen
         name="DashboardScreen"
-        component={DashboardScreen}
+        component={BottomNavigation}
         options={{
+          headerShown:false,
           headerTitleAlign:'center',
         }}
       />
