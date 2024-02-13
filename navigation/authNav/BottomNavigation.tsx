@@ -12,6 +12,7 @@ import DashboardScreen from '../../screens/Dashboard/DashboardScreen';
 
 
 import { BottomTabsParamList } from '../../types/auth-stack';
+import DashboardHeader from '../../components/BottomNavigation/Dashboardheader';
 
 
 const Tab = createBottomTabNavigator<BottomTabsParamList>();
@@ -32,7 +33,9 @@ const BottomNavigation =()=>{
             title:"Home",
             tabBarIcon:({ focused, color, size})=>{
               return <MaterialCommunityIcons name="home-automation" size={size} color={color} />
-            }
+            },
+            headerShown:true,
+            header:()=><DashboardHeader/>
           }}
         />
         <Tab.Screen 

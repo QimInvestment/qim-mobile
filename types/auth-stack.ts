@@ -1,5 +1,6 @@
 export type AuthStackParamList = {
   DashboardScreen: undefined,
+  AnotherScreen: undefined
 };
 
 export type BottomTabsParamList={
