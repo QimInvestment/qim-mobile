@@ -1,11 +1,10 @@
 import { COLORS } from "../../constants/theme";
-import { View,Text, TextInput, TextInputProps, StyleProp, TextStyle, ViewStyle, StyleSheet } from "react-native";
+import { View, TextInput, TextInputProps, StyleProp, TextStyle, ViewStyle, StyleSheet } from "react-native";
 import CustomText from "./CustomText";
 
 // redux
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
-import GoogleLogoIcon from "../../assets/icons/shared/GoogleLogoIcon";
 
 type Props ={
   error?: string,
