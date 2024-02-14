@@ -1,12 +1,13 @@
 import { Text, View, Button } from "react-native"
 import useMainAuthNavigation from "../../hooks/useMainAuthNavigation"
+import CustomText from "../../components/shared/CustomText";
 
 const DashboardScreen =()=>{
   const navigation = useMainAuthNavigation();
 
   return(
     <View>
-      <Text>Dashboard Screen</Text>
+      <CustomText>Dashboard Screen</CustomText>
       <Button title="Another Screen" onPress={()=>navigation.navigate("AnotherScreen")}/>
     </View>
   )

@@ -18,6 +18,7 @@ import { COLORS } from "../constants/theme";
 import PinVerificationPane from "../components/shared/PinVerificationPane";
 import CompletionModal from "../components/shared/CompletionModal";
 import WelcomeScreenService from "../service/Welcome/WelcomeScreenService";
+import CustomText from "../components/shared/CustomText";
 
 
 const WelcomeScreen =()=>{
@@ -31,7 +32,11 @@ const WelcomeScreen =()=>{
 
   return(
     <View style={{flex:1, backgroundColor:theme.backGroundColor}}>
-      <Text style={{color:theme.color}}>Welcome</Text>
+      <CustomText
+        style={{color:theme.color}}
+      >
+        Welcome
+      </CustomText>
       <CustomButton
         buttonText="Next Screen"
         onPress={()=>navigation.navigate("ThemePreferenceScreen")}

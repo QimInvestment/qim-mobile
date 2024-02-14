@@ -1,5 +1,6 @@
 import { COLORS } from "../../constants/theme";
 import { View,Text, TextInput, TextInputProps, StyleProp, TextStyle, ViewStyle, StyleSheet } from "react-native";
+import CustomText from "./CustomText";
 
 // redux
 import { useSelector } from "react-redux";
@@ -26,7 +27,7 @@ const CustomInput = (props:CustomInputProps)=>{
 
   return(
     <View style={[styles.mainCon, mainContainerStyle && mainContainerStyle]}>
-      {labelText && <Text style={[{color:theme.color, marginBottom:3}, labelStyle]}>{labelText}</Text>}
+      {labelText && <CustomText style={[{color:theme.color, marginBottom:3}, labelStyle]}>{labelText}</CustomText>}
 
       <View style={[styles.inputCon, inputContainerStyle && inputContainerStyle]}>
         {leftIcon && <View style={styles.iconContainer}>{leftIcon}</View>}
@@ -39,7 +40,7 @@ const CustomInput = (props:CustomInputProps)=>{
         {rightIcon && <View style={styles.iconContainer}>{rightIcon}</View>}
       </View>
 
-      {error && <Text style={{color:'red', fontSize:10}}>{error}</Text>}
+      {error && <CustomText style={{color:'red', fontSize:10}}>{error}</CustomText>}
     </View>
   )
 }

@@ -3,6 +3,7 @@ import { Text, TouchableOpacity, View, StyleSheet, StyleProp, ViewStyle, TextSty
 import { LinearGradient } from "expo-linear-gradient";
 import { COLORS } from "../../constants/theme";
 import MaskedView from '@react-native-masked-view/masked-view';
+import CustomText from "./CustomText";
 
 // redux
 import { useSelector } from "react-redux";
@@ -72,11 +73,11 @@ const ButtonWithIcon = ({
 
       <View style={styles.virtualContainer}>
         {icon && <View style={styles.iconContainer}>{icon}</View>}
-        <Text
+        <CustomText
           style={[{color:theme.color,fontSize:17},textStyle]}
         >
           {buttonText}
-        </Text>
+        </CustomText>
         {rightIcon && <View style={styles.rightIconContainer}>{rightIcon}</View>}
 
       </View>

@@ -25,6 +25,14 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "plugins": [
+      [
+        "expo-font",
+        {
+          "fonts": ["./assets/fonts/Montserrat.ttf", "./assets/fonts/MontserratAlternates.ttf"]
+        }
+      ]
+    ]
   }
 }

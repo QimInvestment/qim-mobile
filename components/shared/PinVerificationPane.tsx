@@ -5,6 +5,7 @@ import { COLORS } from "../../constants/theme"
 // redux
 import { useSelector } from "react-redux"
 import { RootState } from "../../redux/store"
+import CustomText from "./CustomText"
 
 type PinVerificationPaneProp = {
   containerStyle?:ViewStyle,
@@ -30,12 +31,12 @@ const PinVerificationPane =({containerStyle, pin, setPin}:PinVerificationPanePro
             return(
               <View key={item} style={[styles.pinBox,{backgroundColor:theme.pinBackgroundColor}]}>
                 <View style={[styles.textBox,{borderBottomColor:theme.color, }]}>
-                  <Text 
+                  <CustomText 
                     style={{fontSize:20, fontWeight:'700',color:theme.color}}
                     allowFontScaling={false}
                   >
                     {pin[item] ? pin[item] : ""}
-                  </Text>
+                  </CustomText>
 
                 </View>
               </View>

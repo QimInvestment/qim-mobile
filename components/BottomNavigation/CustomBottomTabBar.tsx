@@ -8,6 +8,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { COLORS } from "../../constants/theme";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
+import CustomText from "../shared/CustomText";
 
 const CustomBottomTabBar = ({ state, descriptors, navigation }:BottomTabBarProps)=> {
   const theme = useSelector((state:RootState)=>state.theme.theme);
@@ -55,9 +56,9 @@ const CustomBottomTabBar = ({ state, descriptors, navigation }:BottomTabBarProps
             <View style={{height:isFocused ? 40 : 'auto', flexDirection: isFocused ? 'row' : 'column', alignItems:'center', justifyContent:'center', paddingHorizontal:8, borderRadius:12,}}>
 
                 {icon as ReactNode}
-                <Text style={{ color: isFocused ? '#fff' : theme.color , marginTop:3, marginLeft: isFocused ? 5 : 0}}>
+                <CustomText style={{ color: isFocused ? '#fff' : theme.color , marginTop:3, marginLeft: isFocused ? 5 : 0}}>
                   {label as string}
-                </Text>
+                </CustomText>
 
             </View>
               </LinearGradient>

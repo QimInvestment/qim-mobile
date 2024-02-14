@@ -5,6 +5,7 @@ import CustomButton from "./CustomButton";
 // redux
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
+import CustomText from "./CustomText";
 
 type CompletionModalProp={
   isCompModalOpen: boolean,
@@ -28,8 +29,8 @@ const CompletionModal =({headingText,subHeadingText, completionText, completionA
 
         <View style={[{backgroundColor:theme.pinBackgroundColor}, styles.itemsContainer]}>
           <CompletionTick/>
-          <Text style={{color:theme.color, fontWeight:'900', fontSize:30, marginBottom:10, marginTop:25}}>{headingText}</Text>
-          <Text style={{color:theme.completionSubTextColor, width:'80%', textAlign:'center', lineHeight:20}}>{subHeadingText}</Text>
+          <CustomText style={{color:theme.color, fontWeight:'900', fontSize:30, marginBottom:10, marginTop:25}}>{headingText}</CustomText>
+          <CustomText style={{color:theme.completionSubTextColor, width:'80%', textAlign:'center', lineHeight:20}}>{subHeadingText}</CustomText>
           <View style={{flex:1}}/>
           <CustomButton
             onPress={()=>completionAction()}

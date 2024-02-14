@@ -2,6 +2,7 @@
 import { LinearGradient } from "expo-linear-gradient";
 import { COLORS } from "../../constants/theme";
 import { Text, TouchableOpacity, View, StyleSheet, StyleProp, ViewStyle, TextStyle,  } from "react-native";
+import CustomText from "./CustomText";
 
 type CustomButtonProps = {
   onPress: ()=>void,
@@ -43,11 +44,11 @@ const CustomButton = ({
         style={[styles.buttonContainer, containerStyle && containerStyle]}
       >
         <View style={styles.virtualContainer}>
-          <Text
+          <CustomText
           style={[{color:'#fff', fontWeight:'bold', fontSize:17},textStyle]}
         >
           {buttonText}
-        </Text>
+        </CustomText>
 
         </View>
       </LinearGradient>
