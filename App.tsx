@@ -1,19 +1,17 @@
-import { store } from './redux/store';
-import { Provider } from 'react-redux';
-import RootNavigation from './navigation/RootNavigation';
-import { useFonts } from 'expo-font';
-import { useCallback} from 'react';
-
-
+import React from "react";
+import RootNavigation from "./navigation/RootNavigation";
+import { store } from "./redux/store";
+import { Provider } from "react-redux";
+import { useFonts } from "expo-font";
+import { useCallback } from "react";
 
 export default function App() {
   const [fontsLoaded, fontError] = useFonts({
-    'Montserrat': require('./assets/fonts/Montserrat.ttf'),
+    Montserrat: require("./assets/fonts/Montserrat.ttf"),
   });
 
   const onLayoutRootView = useCallback(async () => {
     if (fontsLoaded || fontError) {
-
     }
   }, [fontsLoaded, fontError]);
 
@@ -22,7 +20,7 @@ export default function App() {
   }
   return (
     <Provider store={store}>
-      <RootNavigation/>
+      <RootNavigation />
     </Provider>
   );
 }

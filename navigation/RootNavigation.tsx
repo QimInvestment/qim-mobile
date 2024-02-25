@@ -1,4 +1,5 @@
-import {SafeAreaView} from "react-native"
+import React from "react";
+import { StatusBar } from "expo-status-bar";
 import { NavigationContainer } from "@react-navigation/native";
 
 // redux
@@ -9,15 +10,15 @@ import { useSelector } from "react-redux";
 import UnAuthStack from "./unAuthNav/UnAuthStack";
 import AuthStack from "./authNav/AuthStack";
 
-const RootNavigation =()=>{
-  const {isAuthenticated} = useSelector((state:RootState)=>state.auth);
+const RootNavigation = () => {
+  const { isAuthenticated } = useSelector((state: RootState) => state.auth);
 
-  return(
+  return (
     <NavigationContainer>
-      <SafeAreaView/>
-      {!isAuthenticated ? <UnAuthStack/> : <AuthStack/>}
+      <StatusBar style="auto" />
+      {!isAuthenticated ? <UnAuthStack /> : <AuthStack />}
     </NavigationContainer>
-  )
-}
+  );
+};
 
-export default RootNavigation
+export default RootNavigation;
