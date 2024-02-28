@@ -1,8 +1,11 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import {
   ActivityIndicator,
   Alert,
+  KeyboardAvoidingView,
+  Platform,
   Pressable,
+  StatusBar,
   StyleSheet,
   Text,
   View,
@@ -36,10 +39,10 @@ const SignUpScreen = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const handleSignUp = (
-    acceptTerms: any,
-    fullName: any,
-    email: any,
-    password: any
+    acceptTerms: boolean,
+    fullName: string,
+    email: string,
+    password: string
   ) => {
     try {
       if (!acceptTerms) {
@@ -57,27 +60,28 @@ const SignUpScreen = () => {
       const isValidEmail = emailRegex.test(validEmail);
       const isValidFullName = validFullName.length >= 3;
       const isValidPassword = validPassword.length >= 8;
-      setNameError(!isValidFullName);
-      setEmailError(!isValidEmail);
-      setPasswordError(!isValidPassword);
 
-      if (nameError || emailError || passwordError) {
-        return;
+      if (!isValidEmail || !isValidFullName || !isValidPassword) {
+        setNameError(!isValidFullName);
+        setEmailError(!isValidEmail);
+        setPasswordError(!isValidPassword);
+        throw Error();
       }
 
       setTimeout(() => {
         setIsLoading(false);
-        Alert.alert(`${validFullName}, ${validEmail}, ${validPassword}`);
+        navigation.navigate("OtpVerificationScreen", { screen: "SignUp" });
       }, 3000);
     } catch (err) {
-      console.log(err);
+      setIsLoading(false);
     }
   };
 
   const goToLoginScreen = () => navigation.navigate("LoginScreen");
 
   return (
-    <View
+    <KeyboardAvoidingView
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
       style={[styles.container, { backgroundColor: theme.backGroundColor }]}
     >
       <View style={styles.textContainer}>
@@ -187,27 +191,27 @@ const SignUpScreen = () => {
             </Pressable>
           </View>
         </View>
+      </View>
 
-        <View style={styles.alternativeContainer}>
-          <View style={styles.alternativeHeadingContainer}>
-            <View style={styles.alternativeLines} />
-            <Text style={[styles.alternativeText, { color: theme.color }]}>
-              Or continue with
-            </Text>
-            <View style={styles.alternativeLines} />
-          </View>
+      <View style={styles.alternativeContainer}>
+        <View style={styles.alternativeHeadingContainer}>
+          <View style={styles.alternativeLines} />
+          <Text style={[styles.alternativeText, { color: theme.color }]}>
+            Or continue with
+          </Text>
+          <View style={styles.alternativeLines} />
+        </View>
 
-          <View style={styles.alternativeIconContainer}>
-            <Pressable style={styles.icon} onPress={() => {}}>
-              <GoogleLogoIcon />
-            </Pressable>
-            <Pressable style={styles.icon} onPress={() => {}}>
-              <FontAwesome5 name="facebook" size={20} color="#316FF6" />
-            </Pressable>
-          </View>
+        <View style={styles.alternativeIconContainer}>
+          <Pressable style={styles.icon} onPress={() => {}}>
+            <GoogleLogoIcon />
+          </Pressable>
+          <Pressable style={styles.icon} onPress={() => {}}>
+            <FontAwesome5 name="facebook" size={20} color="#316FF6" />
+          </Pressable>
         </View>
       </View>
-    </View>
+    </KeyboardAvoidingView>
   );
 };
 
@@ -217,21 +221,20 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingHorizontal: 20,
-    paddingTop: 50,
-    gap: 20,
+    paddingVertical: StatusBar.currentHeight,
+    gap: 40,
   },
   textContainer: {
     gap: 4,
+    alignItems: "flex-start",
   },
   heading: {
-    textAlign: "left",
-    fontSize: 25,
+    fontSize: 30,
     fontFamily: "Montserrat",
     fontWeight: "bold",
   },
   body: {
-    textAlign: "left",
-    fontSize: 12,
+    fontSize: 16,
     fontFamily: "Montserrat",
   },
   terms: {
@@ -255,7 +258,6 @@ const styles = StyleSheet.create({
     fontFamily: "Montserrat",
   },
   alternativeContainer: {
-    marginTop: 20,
     alignItems: "center",
     gap: 20,
   },

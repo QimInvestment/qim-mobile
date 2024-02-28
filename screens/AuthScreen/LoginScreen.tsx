@@ -1,8 +1,11 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import {
   ActivityIndicator,
   Alert,
+  KeyboardAvoidingView,
+  Platform,
   Pressable,
+  StatusBar,
   StyleSheet,
   Text,
   View,
@@ -12,7 +15,6 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
 import CustomInput from "../../components/shared/CustomInput";
 
-import { Ionicons } from "@expo/vector-icons";
 import { Octicons } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
@@ -33,7 +35,11 @@ const LoginScreen = () => {
   const [passwordError, setPasswordError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleLogin = (acceptTerms: any, email: any, password: any) => {
+  const handleLogin = (
+    acceptTerms: boolean,
+    email: string,
+    password: string
+  ) => {
     try {
       if (!acceptTerms) {
         return Alert.alert("Kindly accept Terms & Conditions!");
@@ -48,26 +54,29 @@ const LoginScreen = () => {
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       const isValidEmail = emailRegex.test(validEmail);
       const isValidPassword = validPassword.length >= 8;
-      setEmailError(!isValidEmail);
-      setPasswordError(!isValidPassword);
 
-      if (emailError || passwordError) {
-        return;
+      if (!isValidEmail || !isValidPassword) {
+        setEmailError(!isValidEmail);
+        setPasswordError(!isValidPassword);
+        throw Error();
       }
 
       setTimeout(() => {
         setIsLoading(false);
-        Alert.alert(`${validEmail}, ${validPassword}`);
+        navigation.navigate("OtpVerificationScreen", { screen: "Login" });
       }, 3000);
     } catch (err) {
-      console.log(err);
+      setIsLoading(false);
     }
   };
 
   const goToSignUpScreen = () => navigation.navigate("SignUpScreen");
+  const goToResetPasswordScreen = () =>
+    navigation.navigate("ResetPasswordScreen");
 
   return (
-    <View
+    <KeyboardAvoidingView
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
       style={[styles.container, { backgroundColor: theme.backGroundColor }]}
     >
       <View style={styles.textContainer}>
@@ -123,17 +132,22 @@ const LoginScreen = () => {
             onPress={() => setAcceptTerms((prev) => !prev)}
           />
 
-          <Text style={[styles.termsText, { color: theme.color }]}>
+          <Text
+            style={[
+              styles.termsText,
+              { color: theme.color, fontWeight: "100" },
+            ]}
+          >
             Save my login details for later
           </Text>
         </View>
 
-        <View style={{ alignItems: "center", gap: 8, marginTop: 40 }}>
+        <View style={{ alignItems: "center", gap: 15, marginTop: 10 }}>
           <View style={styles.termsTextContainer}>
             <Text style={[styles.termsText, { color: theme.color }]}>
               Forgot Password?
             </Text>
-            <Pressable onPress={goToSignUpScreen}>
+            <Pressable onPress={goToResetPasswordScreen}>
               <GradientText style={styles.termsGradient}>
                 Reset Password
               </GradientText>
@@ -160,27 +174,27 @@ const LoginScreen = () => {
             </Pressable>
           </View>
         </View>
+      </View>
 
-        <View style={styles.alternativeContainer}>
-          <View style={styles.alternativeHeadingContainer}>
-            <View style={styles.alternativeLines} />
-            <Text style={[styles.alternativeText, { color: theme.color }]}>
-              Or continue with
-            </Text>
-            <View style={styles.alternativeLines} />
-          </View>
+      <View style={styles.alternativeContainer}>
+        <View style={styles.alternativeHeadingContainer}>
+          <View style={styles.alternativeLines} />
+          <Text style={[styles.alternativeText, { color: theme.color }]}>
+            Or continue with
+          </Text>
+          <View style={styles.alternativeLines} />
+        </View>
 
-          <View style={styles.alternativeIconContainer}>
-            <Pressable style={styles.icon} onPress={() => {}}>
-              <GoogleLogoIcon />
-            </Pressable>
-            <Pressable style={styles.icon} onPress={() => {}}>
-              <FontAwesome5 name="facebook" size={20} color="#316FF6" />
-            </Pressable>
-          </View>
+        <View style={styles.alternativeIconContainer}>
+          <Pressable style={styles.icon} onPress={() => {}}>
+            <GoogleLogoIcon />
+          </Pressable>
+          <Pressable style={styles.icon} onPress={() => {}}>
+            <FontAwesome5 name="facebook" size={20} color="#316FF6" />
+          </Pressable>
         </View>
       </View>
-    </View>
+    </KeyboardAvoidingView>
   );
 };
 
@@ -190,21 +204,20 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingHorizontal: 20,
-    paddingTop: 50,
-    gap: 20,
+    paddingVertical: StatusBar.currentHeight,
+    gap: 40,
   },
   textContainer: {
     gap: 4,
+    alignItems: "flex-start",
   },
   heading: {
-    textAlign: "left",
-    fontSize: 25,
+    fontSize: 30,
     fontFamily: "Montserrat",
     fontWeight: "bold",
   },
   body: {
-    textAlign: "left",
-    fontSize: 12,
+    fontSize: 16,
     fontFamily: "Montserrat",
   },
   terms: {
@@ -216,21 +229,22 @@ const styles = StyleSheet.create({
   termsTextContainer: {
     flexDirection: "row",
     alignItems: "center",
-    flexWrap: "wrap",
     gap: 5,
   },
   termsText: {
     fontSize: 12,
     fontFamily: "Montserrat",
+    fontWeight: "bold",
   },
   termsGradient: {
     fontSize: 12,
     fontFamily: "Montserrat",
+    fontWeight: "bold",
   },
   alternativeContainer: {
-    marginTop: 40,
     alignItems: "center",
     gap: 20,
+    marginTop: 30,
   },
   alternativeHeadingContainer: {
     flexDirection: "row",

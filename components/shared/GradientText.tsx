@@ -19,8 +19,8 @@ const GradientText = ({ children, style }: GradientText) => {
     >
       <LinearGradient
         colors={["#af7717", "#10D101"]}
-        // start={{ x: 0, y: 0 }}
-        // end={{ x: 0, y: 1 }}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 0, y: 1 }}
       >
         <Text style={[style, { opacity: 0 }]}>{children}</Text>
       </LinearGradient>

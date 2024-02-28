@@ -1,11 +1,12 @@
-import { Text, View } from "react-native"
+import React from "react";
+import { Text, View } from "react-native";
 
-const AnotherScreen =()=>{
-  return(
+const AnotherScreen = () => {
+  return (
     <View>
       <Text>Another Screen</Text>
     </View>
-  )
-}
+  );
+};
 
-export default AnotherScreen
+export default AnotherScreen;

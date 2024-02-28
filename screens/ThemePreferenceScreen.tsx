@@ -5,7 +5,7 @@ import { Image, StyleSheet, Text, View } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../redux/store";
 import GradientText from "../components/shared/GradientText";
-import { toggleTheme } from "../redux/features/themeSlice";
+import { darkTheme, lightTheme } from "../redux/features/themeSlice";
 import useUnAuthNavigation from "../hooks/useUnAuthNavigation";
 import ButtonWithIcon from "../components/shared/ButtonWithIcon";
 import { Entypo } from "@expo/vector-icons";
@@ -38,13 +38,21 @@ const ThemePreferenceScreen = () => {
         <ButtonWithIcon
           icon={<Entypo name="light-up" size={24} color="black" />}
           buttonText="Continue in Light Mode"
-          onPress={() => navigation.navigate("SignUpOptionsScreen")}
+          onPress={() => {
+            dispatch(lightTheme());
+            navigation.navigate("SignUpOptionsScreen");
+          }}
+          containerStyle={{
+            backgroundColor: "white",
+            borderRadius: 50,
+          }}
+          textStyle={{ color: "black" }}
         />
         <ButtonWithIcon
           icon={<Ionicons name="moon-outline" size={24} color="white" />}
           buttonText="Continue in Dark Mode"
           onPress={() => {
-            dispatch(toggleTheme());
+            dispatch(darkTheme());
             navigation.navigate("SignUpOptionsScreen");
           }}
           containerStyle={{

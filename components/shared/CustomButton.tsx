@@ -1,7 +1,6 @@
+import React, { ReactNode } from "react";
 import { LinearGradient } from "expo-linear-gradient";
-import { COLORS } from "../../constants/theme";
 import {
-  Text,
   TouchableOpacity,
   View,
   StyleSheet,
@@ -10,7 +9,6 @@ import {
   TextStyle,
 } from "react-native";
 import CustomText from "./CustomText";
-import React, { ReactNode } from "react";
 
 type CustomButtonProps = {
   onPress: () => void;
@@ -42,8 +40,8 @@ const CustomButton = ({
   return (
     <TouchableOpacity onPress={onPress} disabled={disabled}>
       <LinearGradient
-        start={{ x: 0.1, y: 0.7 }}
         colors={["#0C8B02", "#45BB3B", "#10D101"]}
+        start={{ x: 0.1, y: 0.7 }}
         style={[styles.buttonContainer, containerStyle && containerStyle]}
       >
         <View style={styles.virtualContainer}>

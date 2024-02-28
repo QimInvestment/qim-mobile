@@ -1,6 +1,10 @@
 export type UnAuthStackParamList = {
-  WelcomeScreen: undefined;
   ThemePreferenceScreen: undefined;
   WelcomeMessageScreen: undefined;
   SignUpOptionsScreen: undefined;
+  SignUpScreen: undefined;
+  LoginScreen: undefined;
+  OtpVerificationScreen: undefined;
+  ResetPasswordScreen: undefined;
+  NewPasswordScreen: undefined;
 };

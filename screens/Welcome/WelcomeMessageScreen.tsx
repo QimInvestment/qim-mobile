@@ -20,7 +20,7 @@ const WelcomeMessageScreen = () => {
           Dive into the World of Seamless{"\n"} Trading with QimInvest
         </GradientText>
 
-        <Text style={styles.body}>
+        <Text style={[styles.body, { color: theme.color }]}>
           Seamlessly execute trades with our user-friendly platform, backed by
           real-time market data and intuitive tools. Stay informed with
           personalized insights, educational resources, and expert analysis.
