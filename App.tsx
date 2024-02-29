@@ -10,7 +10,7 @@ export default function App() {
     Montserrat: require("./assets/fonts/Montserrat.ttf"),
   });
 
-  const onLayoutRootView = useCallback(async () => {
+  const onLayoutRootView = useCallback(() => {
     if (fontsLoaded || fontError) {
     }
   }, [fontsLoaded, fontError]);

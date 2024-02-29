@@ -49,7 +49,7 @@ const UnAuthStack = () => {
         options={{
           headerShown: true,
           headerTitle: "",
-          headerStyle: { backgroundColor: theme.backGroundColor },
+          headerStyle: { backgroundColor: theme.backGroundColor as string },
           headerLeft: () => (
             <Ionicons
               style={{
@@ -71,7 +71,7 @@ const UnAuthStack = () => {
         options={{
           headerShown: true,
           headerTitle: "",
-          headerStyle: { backgroundColor: theme.backGroundColor },
+          headerStyle: { backgroundColor: theme.backGroundColor as string },
           headerLeft: () => (
             <Ionicons
               style={{
@@ -93,7 +93,7 @@ const UnAuthStack = () => {
         options={{
           headerShown: true,
           headerTitle: "",
-          headerStyle: { backgroundColor: theme.backGroundColor },
+          headerStyle: { backgroundColor: theme.backGroundColor as string },
           headerLeft: () => (
             <Ionicons
               style={{

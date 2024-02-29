@@ -36,14 +36,11 @@ const LoginScreen = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const handleLogin = (
-    acceptTerms: boolean,
     email: string,
-    password: string
+    password: string,
+    acceptTerms?: boolean
   ) => {
     try {
-      if (!acceptTerms) {
-        return Alert.alert("Kindly accept Terms & Conditions!");
-      }
       setIsLoading(true);
 
       // Verification of user's input
@@ -63,7 +60,9 @@ const LoginScreen = () => {
 
       setTimeout(() => {
         setIsLoading(false);
-        navigation.navigate("OtpVerificationScreen", { screen: "Login" });
+        navigation.navigate("OtpVerificationScreen", {
+          screen: "Login",
+        } as unknown as undefined);
       }, 3000);
     } catch (err) {
       setIsLoading(false);
@@ -162,7 +161,7 @@ const LoginScreen = () => {
                 "Login"
               )
             }
-            onPress={() => handleLogin(acceptTerms, email, password)}
+            onPress={() => handleLogin(email, password, acceptTerms)}
           />
 
           <View style={styles.termsTextContainer}>

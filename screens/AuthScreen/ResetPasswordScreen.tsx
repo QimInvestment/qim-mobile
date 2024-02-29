@@ -25,13 +25,17 @@ const ResetPasswordScreen = () => {
       const validEmail = email.trim();
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       const isValidEmail = emailRegex.test(validEmail);
-      setEmailError(!isValidEmail);
 
-      if (emailError) throw Error();
+      if (!isValidEmail) {
+        setEmailError(!isValidEmail);
+        throw Error();
+      }
 
       setTimeout(() => {
         setIsLoading(false);
-        navigation.navigate("OtpVerificationScreen", { screen: "Reset" });
+        navigation.navigate("OtpVerificationScreen", {
+          screen: "Reset",
+        } as unknown as undefined);
       }, 3000);
     } catch (err) {
       setIsLoading(false);

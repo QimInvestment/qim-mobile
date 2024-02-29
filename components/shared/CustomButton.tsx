@@ -41,7 +41,7 @@ const CustomButton = ({
     <TouchableOpacity onPress={onPress} disabled={disabled}>
       <LinearGradient
         colors={["#0C8B02", "#45BB3B", "#10D101"]}
-        start={{ x: 0.1, y: 0.7 }}
+        // start={{ x: 0.1, y: 0.7 }}
         style={[styles.buttonContainer, containerStyle && containerStyle]}
       >
         <View style={styles.virtualContainer}>

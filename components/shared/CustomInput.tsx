@@ -68,7 +68,9 @@ const CustomInput = (props: CustomInputProps) => {
       </View>
 
       {error && (
-        <CustomText style={{ color: "red", fontSize: 10 }}>{error}</CustomText>
+        <CustomText style={{ color: "red", fontSize: 12, marginTop: 4 }}>
+          {error}
+        </CustomText>
       )}
     </View>
   );

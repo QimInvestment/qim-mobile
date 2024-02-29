@@ -70,7 +70,9 @@ const SignUpScreen = () => {
 
       setTimeout(() => {
         setIsLoading(false);
-        navigation.navigate("OtpVerificationScreen", { screen: "SignUp" });
+        navigation.navigate("OtpVerificationScreen", {
+          screen: "SignUp",
+        } as unknown as undefined);
       }, 3000);
     } catch (err) {
       setIsLoading(false);
@@ -222,7 +224,7 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingHorizontal: 20,
     paddingVertical: StatusBar.currentHeight,
-    gap: 40,
+    gap: 25,
   },
   textContainer: {
     gap: 4,
