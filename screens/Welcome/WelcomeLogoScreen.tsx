@@ -12,7 +12,7 @@ const WelcomeLogoScreen = () => {
   useEffect(() => {
     const timeOut = setTimeout(() => {
       navigation.navigate("WelcomeMessageScreen");
-    }, 4000);
+    }, 3000);
 
     return () => {
       clearTimeout(timeOut);
