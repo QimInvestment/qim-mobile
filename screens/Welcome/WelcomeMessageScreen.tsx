@@ -1,9 +1,14 @@
 import React from "react";
 import { Image, Pressable, StyleSheet, Text, View } from "react-native";
+
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
+
 import GradientText from "../../components/shared/GradientText";
+
 import useUnAuthNavigation from "../../hooks/useUnAuthNavigation";
+
+import Animated, { ZoomInDown, ZoomInUp } from "react-native-reanimated";
 
 const WelcomeMessageScreen = () => {
   const theme = useSelector((state: RootState) => state.theme.theme);
@@ -13,9 +18,20 @@ const WelcomeMessageScreen = () => {
     <View
       style={[styles.container, { backgroundColor: theme.backGroundColor }]}
     >
-      <Image source={require("../../assets/images/mobile.png")} />
+      <Animated.View
+        entering={ZoomInUp.duration(2000).withInitialValues({
+          transform: [{ translateY: -120 }, { scale: 0 }],
+        })}
+      >
+        <Image source={require("../../assets/images/mobile.png")} />
+      </Animated.View>
 
-      <View style={styles.textContainer}>
+      <Animated.View
+        entering={ZoomInDown.duration(2000).withInitialValues({
+          transform: [{ translateY: 150 }, { scale: 0 }],
+        })}
+        style={styles.textContainer}
+      >
         <GradientText style={styles.heading}>
           Dive into the World of Seamless{"\n"} Trading with QimInvest
         </GradientText>
@@ -25,7 +41,7 @@ const WelcomeMessageScreen = () => {
           real-time market data and intuitive tools. Stay informed with
           personalized insights, educational resources, and expert analysis.
         </Text>
-      </View>
+      </Animated.View>
 
       <Pressable
         onPress={() => navigation.navigate("ThemePreferenceScreen")}

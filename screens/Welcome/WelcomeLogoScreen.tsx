@@ -3,6 +3,7 @@ import { Image, StyleSheet, View } from "react-native";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
 import useUnAuthNavigation from "../../hooks/useUnAuthNavigation";
+import Animated, { ZoomInDown, ZoomInUp } from "react-native-reanimated";
 
 const WelcomeLogoScreen = () => {
   const theme = useSelector((state: RootState) => state.theme.theme);
@@ -11,7 +12,7 @@ const WelcomeLogoScreen = () => {
   useEffect(() => {
     const timeOut = setTimeout(() => {
       navigation.navigate("WelcomeMessageScreen");
-    }, 5000);
+    }, 4000);
 
     return () => {
       clearTimeout(timeOut);
@@ -22,8 +23,25 @@ const WelcomeLogoScreen = () => {
     <View
       style={[styles.container, { backgroundColor: theme.backGroundColor }]}
     >
-      <Image source={require("../../assets/images/logo.png")} />
-      <Image source={require("../../assets/images/qiminvest.png")} />
+      <Animated.View
+        entering={ZoomInUp.delay(300)
+          .duration(2000)
+          .withInitialValues({
+            transform: [{ translateY: -400 }, { scale: 3 }],
+          })}
+      >
+        <Image source={require("../../assets/images/logo.png")} />
+      </Animated.View>
+
+      <Animated.View
+        entering={ZoomInDown.delay(300)
+          .duration(2000)
+          .withInitialValues({
+            transform: [{ translateY: 400 }, { scale: 2 }],
+          })}
+      >
+        <Image source={require("../../assets/images/qiminvest.png")} />
+      </Animated.View>
     </View>
   );
 };
