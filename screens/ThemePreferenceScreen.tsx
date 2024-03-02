@@ -84,13 +84,12 @@ const styles = StyleSheet.create({
   },
   heading: {
     textAlign: "left",
-    fontSize: 25,
-    fontFamily: "Montserrat",
-    fontWeight: "bold",
+    fontSize: 30,
+    fontFamily: "MontserratBold",
   },
   body: {
     textAlign: "left",
-    fontSize: 12,
+    fontSize: 13.5,
     fontFamily: "Montserrat",
   },
   btnContainer: {

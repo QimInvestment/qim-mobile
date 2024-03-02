@@ -1,57 +1,53 @@
-import React, { useState } from "react";
-import { ActivityIndicator, StyleSheet, Text, View } from "react-native";
-import GradientText from "../../components/shared/GradientText";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../redux/store";
-import CustomInput from "../../components/shared/CustomInput";
-
+import React from "react";
+import {
+  ActivityIndicator,
+  KeyboardAvoidingView,
+  Platform,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
-import { COLORS } from "../../constants/theme";
+
+import GradientText from "../../components/shared/GradientText";
+import CustomInput from "../../components/shared/CustomInput";
 import CustomButton from "../../components/shared/CustomButton";
-import useUnAuthNavigation from "../../hooks/useUnAuthNavigation";
 import CompletionModal from "../../components/shared/CompletionModal";
-import WelcomeScreenService from "../../service/Welcome/WelcomeScreenService";
+
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../redux/store";
 import { signInAuthStatus } from "../../redux/features/authSlice";
+
+import { COLORS } from "../../constants/theme";
+import WelcomeScreenService from "../../service/Welcome/WelcomeScreenService";
+import UserAuthService from "../../service/Welcome/UserAuthServices";
 
 const NewPasswordScreen = () => {
   const theme = useSelector((state: RootState) => state.theme.theme);
   const dispatch = useDispatch();
-  const [password, onChangePassword] = useState("");
-  const [newPassword, onChangeNewPassword] = useState("");
-  const [showPassword, setShowPassword] = useState(false);
-  const [showNewPassword, setShowNewPassword] = useState(false);
-  const [passwordError, setPasswordError] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+
+  const {
+    password,
+    onChangePassword,
+    newPassword,
+    onChangeNewPassword,
+    showPassword,
+    setShowPassword,
+    showNewPassword,
+    setShowNewPassword,
+    passwordError,
+    isLoading,
+    handleNewPassword,
+  } = UserAuthService();
 
   const { isCompModalOpen, setIsCompModalOpen } = WelcomeScreenService();
 
-  const handlePasswordReset = (password: string, newPassword: string) => {
-    try {
-      setIsLoading(true);
-
-      // Verification of user's input
-      const validPassword = password.trimStart().trimEnd();
-      const validNewPassword = newPassword.trimStart().trimEnd();
-
-      const checkPassword = validPassword !== validNewPassword;
-
-      if (checkPassword || validPassword.length < 8) {
-        setPasswordError(true);
-        throw Error();
-      }
-
-      setTimeout(() => {
-        setIsLoading(false);
-        setIsCompModalOpen(true);
-      }, 3000);
-    } catch (err) {
-      setIsLoading(false);
-    }
-  };
+  const handleModal = () => setIsCompModalOpen(true);
 
   return (
-    <View
+    <KeyboardAvoidingView
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
       style={[styles.container, { backgroundColor: theme.backGroundColor }]}
     >
       <View style={styles.textContainer}>
@@ -62,7 +58,7 @@ const NewPasswordScreen = () => {
         </Text>
       </View>
 
-      <View style={{ gap: 20, flex: 1 }}>
+      <View style={{ gap: 10 }}>
         <CustomInput
           labelText="Enter new password"
           placeholder="Enter your password"
@@ -129,7 +125,9 @@ const NewPasswordScreen = () => {
                 "Proceed"
               )
             }
-            onPress={() => handlePasswordReset(password, newPassword)}
+            onPress={() =>
+              handleNewPassword(password, newPassword, handleModal)
+            }
           />
         </View>
       </View>
@@ -144,7 +142,7 @@ const NewPasswordScreen = () => {
           dispatch(signInAuthStatus());
         }}
       />
-    </View>
+    </KeyboardAvoidingView>
   );
 };
 
@@ -154,10 +152,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingHorizontal: 20,
-    paddingTop: 10,
-    paddingBottom: 50,
-    gap: 50,
-    justifyContent: "space-between",
+    gap: 30,
   },
   textContainer: {
     gap: 8,
@@ -165,8 +160,7 @@ const styles = StyleSheet.create({
   heading: {
     textAlign: "left",
     fontSize: 25,
-    fontFamily: "Montserrat",
-    fontWeight: "bold",
+    fontFamily: "MontserratBold",
   },
   body: {
     textAlign: "left",

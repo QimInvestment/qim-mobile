@@ -57,13 +57,12 @@ const styles = StyleSheet.create({
   },
   heading: {
     textAlign: "center",
-    fontSize: 20,
-    fontFamily: "Montserrat",
-    fontWeight: "bold",
+    fontSize: 16,
+    fontFamily: "MontserratBold",
   },
   body: {
     textAlign: "center",
-    fontSize: 11,
+    fontSize: 13.2,
     fontFamily: "Montserrat",
   },
   btn: {

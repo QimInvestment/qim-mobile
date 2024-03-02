@@ -1,18 +1,17 @@
 import React from "react";
 import { Image, Pressable, StyleSheet, Text, View } from "react-native";
+import { FontAwesome5 } from "@expo/vector-icons";
+import { Octicons } from "@expo/vector-icons";
 
 // redux
 import { useDispatch, useSelector } from "react-redux";
-// import { signInAuthStatus } from "../redux/features/authSlice";
 import { RootState } from "../../redux/store";
+
 import GradientText from "../../components/shared/GradientText";
-import CustomButton from "../../components/shared/CustomButton";
-import { toggleTheme } from "../../redux/features/themeSlice";
 import ButtonWithIcon from "../../components/shared/ButtonWithIcon";
-import useUnAuthNavigation from "../../hooks/useUnAuthNavigation";
 import GoogleLogoIcon from "../../assets/icons/shared/GoogleLogoIcon";
-import { FontAwesome5 } from "@expo/vector-icons";
-import { Octicons } from "@expo/vector-icons";
+
+import useUnAuthNavigation from "../../hooks/useUnAuthNavigation";
 
 const SignUpOptionsScreen = () => {
   const theme = useSelector((state: RootState) => state.theme.theme);
@@ -32,17 +31,13 @@ const SignUpOptionsScreen = () => {
           <GradientText style={styles.heading}>
             Sign up on {"\n"}QimInvest.
           </GradientText>
+
           <Text style={[styles.body, { color: theme.color }]}>
             Welcome, we are delighted to have you here.
           </Text>
         </View>
 
         <View style={styles.btnContainer}>
-          {/* <Button
-            title="Fake Login"
-            onPress={() => dispatch(signInAuthStatus())}
-          /> */}
-
           <ButtonWithIcon
             icon={<GoogleLogoIcon />}
             buttonText="Continue in Google"
@@ -51,11 +46,13 @@ const SignUpOptionsScreen = () => {
               // navigation.navigate("SignUpOptionsScreen");
             }}
           />
+
           <ButtonWithIcon
             icon={<FontAwesome5 name="facebook" size={24} color="#316FF6" />}
             buttonText="Continue in Facebook"
             onPress={() => {}}
           />
+
           <ButtonWithIcon
             icon={<Octicons name="mail" size={24} color={theme.color} />}
             buttonText="Continue in Email"
@@ -89,8 +86,7 @@ const styles = StyleSheet.create({
   heading: {
     textAlign: "left",
     fontSize: 25,
-    fontFamily: "Montserrat",
-    fontWeight: "bold",
+    fontFamily: "MontserratBold",
   },
   body: {
     textAlign: "left",

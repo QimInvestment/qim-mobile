@@ -29,20 +29,26 @@ const UnAuthStack = () => {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen name="WelcomeLogoScreen" component={WelcomeLogoScreen} />
+
       <Stack.Screen
         name="WelcomeMessageScreen"
         component={WelcomeMessageScreen}
       />
+
       <Stack.Screen
         name="ThemePreferenceScreen"
         component={ThemePreferenceScreen}
       />
+
       <Stack.Screen
         name="SignUpOptionsScreen"
         component={SignUpOptionsScreen}
       />
+
       <Stack.Screen name="SignUpScreen" component={SignUpScreen} />
+
       <Stack.Screen name="LoginScreen" component={LoginScreen} />
+
       <Stack.Screen
         name="ResetPasswordScreen"
         component={ResetPasswordScreen}
@@ -65,6 +71,7 @@ const UnAuthStack = () => {
           ),
         }}
       />
+
       <Stack.Screen
         name="NewPasswordScreen"
         component={NewPasswordScreen}
@@ -87,6 +94,7 @@ const UnAuthStack = () => {
           ),
         }}
       />
+
       <Stack.Screen
         name="OtpVerificationScreen"
         component={OtpVerificationScreen}

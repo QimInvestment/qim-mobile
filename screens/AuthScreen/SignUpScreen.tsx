@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   ActivityIndicator,
-  Alert,
   KeyboardAvoidingView,
   Platform,
   Pressable,
@@ -10,76 +9,44 @@ import {
   Text,
   View,
 } from "react-native";
-import GradientText from "../../components/shared/GradientText";
-import { useSelector } from "react-redux";
-import { RootState } from "../../redux/store";
-import CustomInput from "../../components/shared/CustomInput";
-
 import { Ionicons } from "@expo/vector-icons";
 import { Octicons } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
 import { FontAwesome5 } from "@expo/vector-icons";
-import { COLORS } from "../../constants/theme";
+
+import GradientText from "../../components/shared/GradientText";
+import CustomInput from "../../components/shared/CustomInput";
 import CustomButton from "../../components/shared/CustomButton";
-import useUnAuthNavigation from "../../hooks/useUnAuthNavigation";
 import GoogleLogoIcon from "../../assets/icons/shared/GoogleLogoIcon";
+
+import { useSelector } from "react-redux";
+import { RootState } from "../../redux/store";
+
+import { COLORS } from "../../constants/theme";
+import UserAuthService from "../../service/Welcome/UserAuthServices";
 
 const SignUpScreen = () => {
   const theme = useSelector((state: RootState) => state.theme.theme);
-  const navigation = useUnAuthNavigation();
-  const [fullName, onChangeFullName] = useState("");
-  const [email, onChangeEmail] = useState("");
-  const [password, onChangePassword] = useState("");
-  const [showPassword, setShowPassword] = useState(false);
-  const [acceptTerms, setAcceptTerms] = useState(false);
-  const [nameError, setNameError] = useState(false);
-  const [emailError, setEmailError] = useState(false);
-  const [passwordError, setPasswordError] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
 
-  const handleSignUp = (
-    acceptTerms: boolean,
-    fullName: string,
-    email: string,
-    password: string
-  ) => {
-    try {
-      if (!acceptTerms) {
-        return Alert.alert("Kindly accept Terms & Conditions!");
-      }
-      setIsLoading(true);
-
-      // Verification of user's input
-      const validFullName = fullName.trim();
-      const validEmail = email.trim();
-      const validPassword = password.trimStart().trimEnd();
-
-      // Simple email validation using a regular expression
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      const isValidEmail = emailRegex.test(validEmail);
-      const isValidFullName = validFullName.length >= 3;
-      const isValidPassword = validPassword.length >= 8;
-
-      if (!isValidEmail || !isValidFullName || !isValidPassword) {
-        setNameError(!isValidFullName);
-        setEmailError(!isValidEmail);
-        setPasswordError(!isValidPassword);
-        throw Error();
-      }
-
-      setTimeout(() => {
-        setIsLoading(false);
-        navigation.navigate("OtpVerificationScreen", {
-          screen: "SignUp",
-        } as unknown as undefined);
-      }, 3000);
-    } catch (err) {
-      setIsLoading(false);
-    }
-  };
-
-  const goToLoginScreen = () => navigation.navigate("LoginScreen");
+  const {
+    fullName,
+    onChangeFullName,
+    nameError,
+    email,
+    onChangeEmail,
+    emailError,
+    password,
+    onChangePassword,
+    showPassword,
+    passwordError,
+    setShowPassword,
+    acceptTerms,
+    setAcceptTerms,
+    isLoading,
+    handleSignUp,
+    goToLoginScreen,
+  } = UserAuthService();
 
   return (
     <KeyboardAvoidingView
@@ -160,13 +127,17 @@ const SignUpScreen = () => {
             <Text style={[styles.termsText, { color: theme.color }]}>
               I have read and I accept the
             </Text>
+
             <GradientText style={styles.termsGradient}>
               privacy policy
             </GradientText>
+
             <Text style={[styles.termsText, { color: theme.color }]}>and</Text>
+
             <GradientText style={styles.termsGradient}>
               terms of service
             </GradientText>
+
             <Text style={[styles.termsText, { color: theme.color }]}>
               of Qiminvest.
             </Text>
@@ -188,6 +159,7 @@ const SignUpScreen = () => {
             <Text style={[styles.termsText, { color: theme.color }]}>
               Already have an account with us?
             </Text>
+
             <Pressable onPress={goToLoginScreen}>
               <GradientText style={styles.termsGradient}>Login</GradientText>
             </Pressable>
@@ -208,6 +180,7 @@ const SignUpScreen = () => {
           <Pressable style={styles.icon} onPress={() => {}}>
             <GoogleLogoIcon />
           </Pressable>
+
           <Pressable style={styles.icon} onPress={() => {}}>
             <FontAwesome5 name="facebook" size={20} color="#316FF6" />
           </Pressable>
@@ -224,7 +197,8 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingHorizontal: 20,
     paddingVertical: StatusBar.currentHeight,
-    gap: 25,
+    // gap: 16,
+    justifyContent: "space-between",
   },
   textContainer: {
     gap: 4,
@@ -232,8 +206,7 @@ const styles = StyleSheet.create({
   },
   heading: {
     fontSize: 30,
-    fontFamily: "Montserrat",
-    fontWeight: "bold",
+    fontFamily: "MontserratBold",
   },
   body: {
     fontSize: 16,

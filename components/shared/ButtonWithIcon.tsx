@@ -1,5 +1,5 @@
+import React from "react";
 import {
-  Text,
   TouchableOpacity,
   View,
   StyleSheet,
@@ -8,14 +8,12 @@ import {
   TextStyle,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
-import { COLORS } from "../../constants/theme";
 import MaskedView from "@react-native-masked-view/masked-view";
 import CustomText from "./CustomText";
 
 // redux
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
-import React from "react";
 
 type ButtonWithIconProps = {
   onPress: () => void;

@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   ActivityIndicator,
-  Alert,
   KeyboardAvoidingView,
   Platform,
   Pressable,
@@ -10,68 +9,41 @@ import {
   Text,
   View,
 } from "react-native";
-import GradientText from "../../components/shared/GradientText";
-import { useSelector } from "react-redux";
-import { RootState } from "../../redux/store";
-import CustomInput from "../../components/shared/CustomInput";
-
 import { Octicons } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
 import { FontAwesome5 } from "@expo/vector-icons";
-import { COLORS } from "../../constants/theme";
+
+import { useSelector } from "react-redux";
+import { RootState } from "../../redux/store";
+
+import GradientText from "../../components/shared/GradientText";
+import CustomInput from "../../components/shared/CustomInput";
 import CustomButton from "../../components/shared/CustomButton";
-import useUnAuthNavigation from "../../hooks/useUnAuthNavigation";
 import GoogleLogoIcon from "../../assets/icons/shared/GoogleLogoIcon";
+
+import { COLORS } from "../../constants/theme";
+import UserAuthService from "../../service/Welcome/UserAuthServices";
 
 const LoginScreen = () => {
   const theme = useSelector((state: RootState) => state.theme.theme);
-  const navigation = useUnAuthNavigation();
-  const [email, onChangeEmail] = useState("");
-  const [password, onChangePassword] = useState("");
-  const [showPassword, setShowPassword] = useState(false);
-  const [acceptTerms, setAcceptTerms] = useState(false);
-  const [emailError, setEmailError] = useState(false);
-  const [passwordError, setPasswordError] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
 
-  const handleLogin = (
-    email: string,
-    password: string,
-    acceptTerms?: boolean
-  ) => {
-    try {
-      setIsLoading(true);
-
-      // Verification of user's input
-      const validEmail = email.trim();
-      const validPassword = password.trimStart().trimEnd();
-
-      // Simple email validation using a regular expression
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      const isValidEmail = emailRegex.test(validEmail);
-      const isValidPassword = validPassword.length >= 8;
-
-      if (!isValidEmail || !isValidPassword) {
-        setEmailError(!isValidEmail);
-        setPasswordError(!isValidPassword);
-        throw Error();
-      }
-
-      setTimeout(() => {
-        setIsLoading(false);
-        navigation.navigate("OtpVerificationScreen", {
-          screen: "Login",
-        } as unknown as undefined);
-      }, 3000);
-    } catch (err) {
-      setIsLoading(false);
-    }
-  };
-
-  const goToSignUpScreen = () => navigation.navigate("SignUpScreen");
-  const goToResetPasswordScreen = () =>
-    navigation.navigate("ResetPasswordScreen");
+  const {
+    email,
+    onChangeEmail,
+    password,
+    onChangePassword,
+    showPassword,
+    setShowPassword,
+    acceptTerms,
+    setAcceptTerms,
+    emailError,
+    passwordError,
+    isLoading,
+    handleLogin,
+    goToSignUpScreen,
+    goToResetPasswordScreen,
+  } = UserAuthService();
 
   return (
     <KeyboardAvoidingView
@@ -188,6 +160,7 @@ const LoginScreen = () => {
           <Pressable style={styles.icon} onPress={() => {}}>
             <GoogleLogoIcon />
           </Pressable>
+
           <Pressable style={styles.icon} onPress={() => {}}>
             <FontAwesome5 name="facebook" size={20} color="#316FF6" />
           </Pressable>
@@ -204,7 +177,8 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingHorizontal: 20,
     paddingVertical: StatusBar.currentHeight,
-    gap: 40,
+    // gap: 40,
+    justifyContent: "space-between",
   },
   textContainer: {
     gap: 4,
@@ -212,8 +186,7 @@ const styles = StyleSheet.create({
   },
   heading: {
     fontSize: 30,
-    fontFamily: "Montserrat",
-    fontWeight: "bold",
+    fontFamily: "MontserratBold",
   },
   body: {
     fontSize: 16,
@@ -233,12 +206,10 @@ const styles = StyleSheet.create({
   termsText: {
     fontSize: 12,
     fontFamily: "Montserrat",
-    fontWeight: "bold",
   },
   termsGradient: {
     fontSize: 12,
     fontFamily: "Montserrat",
-    fontWeight: "bold",
   },
   alternativeContainer: {
     alignItems: "center",

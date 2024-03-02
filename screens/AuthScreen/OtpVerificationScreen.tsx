@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   ActivityIndicator,
   Alert,
@@ -7,29 +7,30 @@ import {
   Text,
   View,
 } from "react-native";
-import GradientText from "../../components/shared/GradientText";
-import CustomButton from "../../components/shared/CustomButton";
+import { useRoute } from "@react-navigation/native";
 
-import { COLORS } from "../../constants/theme";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
+import { signInAuthStatus } from "../../redux/features/authSlice";
+
+import GradientText from "../../components/shared/GradientText";
+import CustomButton from "../../components/shared/CustomButton";
 import PinVerificationPane from "../../components/shared/PinVerificationPane";
 import CompletionModal from "../../components/shared/CompletionModal";
+
 import WelcomeScreenService from "../../service/Welcome/WelcomeScreenService";
-import { signInAuthStatus } from "../../redux/features/authSlice";
-import { useRoute } from "@react-navigation/native";
-import useUnAuthNavigation from "../../hooks/useUnAuthNavigation";
+import { COLORS } from "../../constants/theme";
+import UserAuthService from "../../service/Welcome/UserAuthServices";
 
 // type RouteProp =;
 
 const OtpVerificationScreen = () => {
   const theme = useSelector((state: RootState) => state.theme.theme);
   const dispatch = useDispatch();
-  const navigation = useUnAuthNavigation();
   const route = useRoute();
   const { screen } = route?.params as { screen: string };
 
-  const [isLoading, setIsLoading] = useState(false);
+  const { isLoading, setIsLoading, navigation } = UserAuthService();
 
   const { pin, setPin, isCompModalOpen, setIsCompModalOpen } =
     WelcomeScreenService();
@@ -42,6 +43,7 @@ const OtpVerificationScreen = () => {
         <GradientText style={styles.heading}>
           Confirm your {"\n"}Email Address
         </GradientText>
+
         <Text style={[styles.body, { color: theme.color }]}>
           We sent a one time password (OTP) to your email, this is a security
           measure. Kindly input them on the input below;
@@ -54,7 +56,11 @@ const OtpVerificationScreen = () => {
           <CompletionModal
             isCompModalOpen={isCompModalOpen}
             headingText="Congratulation"
-            subHeadingText="You have successfully signed up on QimInvest, your one stop to ensure a seamless trading experience."
+            subHeadingText={`${
+              screen === "Login"
+                ? "You have successfully logged in to QinInvest"
+                : "You have successfully signed up on QimInvest"
+            }, your one stop to ensure a seamless trading experience.`}
             completionText="Continue"
             completionAction={() => {
               setIsCompModalOpen(false);
@@ -119,9 +125,8 @@ const styles = StyleSheet.create({
   },
   heading: {
     textAlign: "left",
-    fontSize: 40,
-    fontFamily: "Montserrat",
-    fontWeight: "bold",
+    fontSize: 30,
+    fontFamily: "MontserratBold",
   },
   body: {
     textAlign: "left",
@@ -137,7 +142,6 @@ const styles = StyleSheet.create({
   termsTextContainer: {
     flexDirection: "row",
     alignItems: "center",
-    flexWrap: "wrap",
     gap: 5,
   },
   termsText: {

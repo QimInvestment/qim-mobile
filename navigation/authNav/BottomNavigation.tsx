@@ -23,7 +23,7 @@ type NavProp = BottomTabNavigationProp<BottomTabsParamList>;
 const BottomNavigation = () => {
   return (
     <Tab.Navigator
-      tabBar={(props) => <CustomBottomTabBar {...props} />}
+      // tabBar={(props) => <CustomBottomTabBar {...props} />}
       screenOptions={{
         headerShown: false,
       }}

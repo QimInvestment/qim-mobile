@@ -1,55 +1,39 @@
-import React, { useState } from "react";
-import { ActivityIndicator, Alert, StyleSheet, Text, View } from "react-native";
-import { useSelector } from "react-redux";
-import { RootState } from "../../redux/store";
-import CustomInput from "../../components/shared/CustomInput";
-
+import React from "react";
+import {
+  ActivityIndicator,
+  KeyboardAvoidingView,
+  Platform,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 import { Octicons } from "@expo/vector-icons";
 
-import { COLORS } from "../../constants/theme";
+import { useSelector } from "react-redux";
+import { RootState } from "../../redux/store";
+
+import CustomInput from "../../components/shared/CustomInput";
 import CustomButton from "../../components/shared/CustomButton";
-import useUnAuthNavigation from "../../hooks/useUnAuthNavigation";
+
+import { COLORS } from "../../constants/theme";
+import UserAuthService from "../../service/Welcome/UserAuthServices";
 
 const ResetPasswordScreen = () => {
   const theme = useSelector((state: RootState) => state.theme.theme);
-  const navigation = useUnAuthNavigation();
-  const [email, onChangeEmail] = useState("");
-  const [emailError, setEmailError] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
 
-  const handlePasswordReset = (email: string) => {
-    try {
-      setIsLoading(true);
-
-      // Verification of user's input
-      const validEmail = email.trim();
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      const isValidEmail = emailRegex.test(validEmail);
-
-      if (!isValidEmail) {
-        setEmailError(!isValidEmail);
-        throw Error();
-      }
-
-      setTimeout(() => {
-        setIsLoading(false);
-        navigation.navigate("OtpVerificationScreen", {
-          screen: "Reset",
-        } as unknown as undefined);
-      }, 3000);
-    } catch (err) {
-      setIsLoading(false);
-    }
-  };
+  const { email, onChangeEmail, emailError, isLoading, handlePasswordReset } =
+    UserAuthService();
 
   return (
-    <View
+    <KeyboardAvoidingView
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
       style={[styles.container, { backgroundColor: theme.backGroundColor }]}
     >
       <View style={styles.textContainer}>
         <Text style={[styles.heading, { color: theme.color }]}>
           Enter Your Email Address.
         </Text>
+
         <Text style={[styles.body, { color: theme.color }]}>
           Kindly, enter your email address, we will send you an activation link
           to reset your log in details.
@@ -78,7 +62,7 @@ const ResetPasswordScreen = () => {
           onPress={() => handlePasswordReset(email)}
         />
       </View>
-    </View>
+    </KeyboardAvoidingView>
   );
 };
 
@@ -91,7 +75,6 @@ const styles = StyleSheet.create({
     paddingTop: 10,
     paddingBottom: 100,
     gap: 50,
-    justifyContent: "space-between",
   },
   textContainer: {
     gap: 8,
@@ -99,8 +82,7 @@ const styles = StyleSheet.create({
   heading: {
     textAlign: "left",
     fontSize: 24,
-    fontFamily: "Montserrat",
-    fontWeight: "bold",
+    fontFamily: "MontserratBold",
   },
   body: {
     textAlign: "left",

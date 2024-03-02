@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 // stacks
 import UnAuthStack from "./unAuthNav/UnAuthStack";
-// import AuthStack from "./authNav/AuthStack";
+import AuthStack from "./authNav/AuthStack";
 import { Button, Text, View } from "react-native";
 import { signOutAuthStatus } from "../redux/features/authSlice";
 
@@ -19,8 +19,8 @@ const RootNavigation = () => {
   return (
     <NavigationContainer>
       <StatusBar style="auto" />
-      {/* {!isAuthenticated ? <UnAuthStack /> : <AuthStack />} */}
-      {!isAuthenticated ? (
+      {!isAuthenticated ? <UnAuthStack /> : <AuthStack />}
+      {/* {!isAuthenticated ? (
         <UnAuthStack />
       ) : (
         <View>
@@ -34,7 +34,7 @@ const RootNavigation = () => {
             onPress={() => dispatch(signOutAuthStatus())}
           />
         </View>
-      )}
+      )} */}
     </NavigationContainer>
   );
 };
