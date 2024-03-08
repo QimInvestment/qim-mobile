@@ -11,9 +11,7 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true
     },
@@ -30,7 +28,11 @@
       [
         "expo-font",
         {
-          "fonts": ["./assets/fonts/Montserrat.ttf", "./assets/fonts/MontserratAlternates.ttf"]
+          "fonts": [
+            "./assets/fonts/Montserrat.ttf",
+            "./assets/fonts/MontserratAlternates.ttf",
+            "./assets/fonts/Montserrat-Bold.ttf"
+          ]
         }
       ]
     ]

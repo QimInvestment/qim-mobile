@@ -1,29 +1,40 @@
 import { createSlice } from "@reduxjs/toolkit";
-import type { PayloadAction } from "@reduxjs/toolkit";
-import type { COLORSType  } from '../../types/theme';
+import type { ThemeType } from "../../types/theme";
 import { createTheme } from "../../constants/theme";
 
-type initialStateType={
-    presentTheme: string,
-    theme:COLORSType,
-}
+type initialStateType = {
+  presentTheme: string;
+  theme: ThemeType;
+};
 
-const initialState : initialStateType={
-    presentTheme : 'lightTheme',
-    theme: createTheme()
-}
+const initialState: initialStateType = {
+  presentTheme: "lightTheme",
+  theme: createTheme(),
+};
 
 const themeSlice = createSlice({
-  name:'theme',
+  name: "theme",
   initialState,
-  reducers:{
-    toggleTheme:(state)=>{
-      state.theme = state.presentTheme === 'lightTheme' ? createTheme('darkTheme') : createTheme('lightTheme');
-      state.presentTheme = state.presentTheme === 'lightTheme' ? 'darkTheme' : 'lightTheme'
-    }
-  }
-})
+  reducers: {
+    toggleTheme: (state) => {
+      state.theme =
+        state.presentTheme === "lightTheme"
+          ? createTheme("darkTheme")
+          : createTheme("lightTheme");
+      state.presentTheme =
+        state.presentTheme === "lightTheme" ? "darkTheme" : "lightTheme";
+    },
+    lightTheme: (state) => {
+      state.theme = createTheme("lightTheme");
+      state.presentTheme = "lightTheme";
+    },
+    darkTheme: (state) => {
+      state.theme = createTheme("darkTheme");
+      state.presentTheme = "darkTheme";
+    },
+  },
+});
 
-export const { toggleTheme } = themeSlice.actions;
+export const { toggleTheme, lightTheme, darkTheme } = themeSlice.actions;
 
 export default themeSlice.reducer;
