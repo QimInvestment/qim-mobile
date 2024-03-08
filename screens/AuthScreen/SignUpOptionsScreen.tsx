@@ -41,10 +41,7 @@ const SignUpOptionsScreen = () => {
           <ButtonWithIcon
             icon={<GoogleLogoIcon />}
             buttonText="Continue in Google"
-            onPress={() => {
-              // dispatch(toggleTheme());
-              // navigation.navigate("SignUpOptionsScreen");
-            }}
+            onPress={() => {}}
           />
 
           <ButtonWithIcon

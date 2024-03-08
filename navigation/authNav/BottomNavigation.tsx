@@ -4,12 +4,10 @@ import {
   BottomTabNavigationProp,
   BottomTabBarProps,
 } from "@react-navigation/bottom-tabs";
-import { useNavigation } from "@react-navigation/native";
 import CustomBottomTabBar from "../../components/BottomNavigation/CustomBottomTabBar";
 
 // assets
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { COLORS } from "../../constants/theme";
 
 // screens
 import DashboardScreen from "../../screens/Dashboard/DashboardScreen";
