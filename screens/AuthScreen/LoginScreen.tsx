@@ -177,7 +177,6 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingHorizontal: 20,
     paddingVertical: StatusBar.currentHeight,
-    // gap: 40,
     justifyContent: "space-between",
   },
   textContainer: {

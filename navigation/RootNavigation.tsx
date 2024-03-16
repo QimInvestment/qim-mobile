@@ -12,10 +12,13 @@ import AuthStack from "./authNav/AuthStack";
 
 const RootNavigation = () => {
   const { isAuthenticated } = useSelector((state: RootState) => state.auth);
+  const presentTheme = useSelector(
+    (state: RootState) => state.theme.presentTheme
+  );
 
   return (
     <NavigationContainer>
-      <StatusBar style="auto" />
+      <StatusBar style={presentTheme === "lightTheme" ? "dark" : "light"} />
       {!isAuthenticated ? <UnAuthStack /> : <AuthStack />}
     </NavigationContainer>
   );

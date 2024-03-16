@@ -1,14 +1,12 @@
-import React, { ReactNode } from "react";
+import React from "react";
+import { Text } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import MaskedView from "@react-native-masked-view/masked-view";
-import { Text } from "react-native";
 
-type GradientText = {
-  style: object;
-  children: ReactNode;
-};
+// types
+import { GradientTextProp } from "../../types/blog-screen";
 
-const GradientText = ({ children, style }: GradientText) => {
+const GradientText = ({ children, style }: GradientTextProp) => {
   return (
     <MaskedView
       maskElement={

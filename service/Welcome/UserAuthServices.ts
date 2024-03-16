@@ -4,10 +4,8 @@ import useUnAuthNavigation from "../../hooks/useUnAuthNavigation";
 
 const UserAuthService = () => {
   const navigation = useUnAuthNavigation();
-
   const [fullName, onChangeFullName] = useState("");
   const [nameError, setNameError] = useState(false);
-
   const [email, onChangeEmail] = useState("");
   const [password, onChangePassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -15,7 +13,6 @@ const UserAuthService = () => {
   const [emailError, setEmailError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-
   const [newPassword, onChangeNewPassword] = useState("");
   const [showNewPassword, setShowNewPassword] = useState(false);
 
@@ -47,7 +44,7 @@ const UserAuthService = () => {
         navigation.navigate("OtpVerificationScreen", {
           screen: "Login",
         } as unknown as undefined);
-      }, 3000);
+      }, 2000);
     } catch (err) {
       setIsLoading(false);
     }
@@ -88,7 +85,7 @@ const UserAuthService = () => {
         navigation.navigate("OtpVerificationScreen", {
           screen: "SignUp",
         } as unknown as undefined);
-      }, 3000);
+      }, 2000);
     } catch (err) {
       setIsLoading(false);
     }
@@ -113,7 +110,7 @@ const UserAuthService = () => {
         navigation.navigate("OtpVerificationScreen", {
           screen: "Reset",
         } as unknown as undefined);
-      }, 3000);
+      }, 2000);
     } catch (err) {
       setIsLoading(false);
     }
@@ -142,7 +139,7 @@ const UserAuthService = () => {
         setIsLoading(false);
         // setIsCompModalOpen(true);
         handleModal();
-      }, 3000);
+      }, 2000);
     } catch (err) {
       setIsLoading(false);
     }

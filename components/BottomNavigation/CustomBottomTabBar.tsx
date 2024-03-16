@@ -1,11 +1,10 @@
 import React, { ReactNode } from "react";
-import { TouchableOpacity, View, Text } from "react-native";
+import { TouchableOpacity, View } from "react-native";
 import { BottomTabBarProps } from "@react-navigation/bottom-tabs";
 import { LinearGradient } from "expo-linear-gradient";
 
 // assets
 import { MaterialIcons } from "@expo/vector-icons";
-import { COLORS } from "../../constants/theme";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
 import CustomText from "../shared/CustomText";
@@ -79,7 +78,11 @@ const CustomBottomTabBar = ({
             key={index}
           >
             <LinearGradient
-              colors={isFocused ? ["#FFA500", "#0C8B02"] : []}
+              colors={
+                isFocused
+                  ? ["#FFA500", "#0C8B02"]
+                  : ["transparent", "transparent"]
+              }
               style={{ borderRadius: 12 }}
             >
               <View
@@ -98,6 +101,8 @@ const CustomBottomTabBar = ({
                     color: isFocused ? "#fff" : theme.color,
                     marginTop: 3,
                     marginLeft: isFocused ? 5 : 0,
+                    fontFamily: "Montserrat",
+                    fontSize: 16,
                   }}
                 >
                   {label as string}
